@@ -1,200 +1,60 @@
-# anime-sdk Website Design System
+# KXScraper Website Design System
 
-## Philosophy
+## Direction
 
-Flat, grid-based, monochromatic. Structure comes from single-pixel borders, not from shadows, elevation, or rounded corners. Every visual region is a cell in a grid — never a floating card. Nesting is avoided: sections sit at a single layer, not stacked inside containers inside wrappers.
+Neo-brutalist developer tooling: charcoal canvas, warm-white type, electric-lime emphasis, hard borders, and selective offset shadows. Editorial sections alternate between full-width bands, code-led layouts, provider rows, and compact capability sequences. Keep product claims factual and preserve `anime-sdk` wherever it names the published package.
 
 ## Tokens
 
-Defined in `src/styles/base.css` as CSS custom properties:
+Core tokens live in `src/styles/base.css`:
 
 ```css
---bg: #111113 /* page and frame background */ --border: rgba(255, 255, 255, 0.08)
-  /* all divider lines */ --muted: #6b7280 /* secondary text */ --accent: #8b5cf6
-  /* purple — links, labels, icons */;
+--bg: #111310;
+--panel: #191c17;
+--panel-raised: #22261f;
+--ink: #f3f3e9;
+--muted: #a4aa9b;
+--subtle: #73796c;
+--border: #484d3f;
+--lime: #c6ff4a;
+--danger: #ff715b;
 ```
 
-**Never hardcode colors.** Always use these vars so light-mode or theme changes propagate.
+Use tokens for UI color. Provider method and language labels use the same base palette; reserve additional colors for actual status meaning.
 
-## Layout
+## Type and layout
 
-### `.frame`
+- **Inter** carries interface and editorial text.
+- **JetBrains Mono** marks code, endpoints, indexes, and technical labels.
+- Use `.section-head`, `.section-head-split`, and `.section-heading` to establish section hierarchy.
+- `.frame` sets the site width; `.hline`, `.cell`, and `.provider-row` provide structure with firm borders.
+- Mobile breakpoints are 800px and 600px. At narrow widths, collapse multi-column examples and keep code blocks horizontally scrollable.
+- Buttons use `.action` / `.action-secondary`; focus indicators are global and must remain visible.
 
-The single centred container (`max-width: 1100px`). The entire page lives inside one `.frame`. There is only ever **one** `.frame` per page.
+## Icons
 
-```html
-<div class="frame">
-  <nav />
-  <!-- sections -->
-  <footer />
-</div>
-```
+Use `@lucide/astro` for UI icons. Keep icons at 12–19px in navigation and labels, around 19px in feature glyphs, and use `aria-hidden="true"` when nearby text already names the action. Icon-only controls need an accessible label. Do not add emoji or a second icon library.
 
-### `.hline`
+## Motion and WebGL
 
-A `border-top: 1px solid var(--border)` that separates sections. Every top-level section starts with `.hline` on the root element. This is how vertical rhythm is created — not margin or padding.
+The hero's Three.js island is hydrated with `client:visible`, caps pixel ratio more aggressively on small screens, pauses when off-screen or the document is hidden, and renders one frame for reduced-motion users. Dispose scene resources on unmount. Any new reveal or hover motion must respect `prefers-reduced-motion` and keep content visible when JavaScript is unavailable.
 
-### `.vline`
+## Code examples and demos
 
-A `border-right: 1px solid var(--border)` used to divide columns inside a row.
+Code examples use hand-authored syntax spans in `.kw`, `.str`, `.fn`, `.typ`, `.num`, `.prop`, `.cm`, and `.pun`. Keep package imports and install commands as `anime-sdk` while that remains the published package identifier. Demo copy controls should copy the exact shown sample and announce their state.
 
-### `.cell`
+## Accessibility
 
-Pre-padded cell for grid layouts (`padding: 36px 40px`, plus bottom and right borders). Use `.no-right` and `.no-bottom` modifier classes to remove the trailing borders on last items.
+- Use semantic headings, navigation landmarks, and lists for ordered workflows.
+- Provide visible focus states and accessible names for icon-only links and buttons.
+- Keep contrast at or above the warm-white/muted and lime/charcoal combinations in the core palette.
+- Decorative WebGL and icons use `aria-hidden`; the page message remains complete without them.
 
-```html
-<div class="hline grid grid-cols-2">
-  <div class="cell">...</div>
-  <div class="cell no-right">...</div>
-</div>
-```
+## File map
 
-## Sections
-
-Every section follows one of two patterns:
-
-### Header + body
-
-```html
-<section id="foo" class="hline">
-  <!-- hline separates from above -->
-  <div class="px-10 py-8">
-    <!-- section header -->
-    <h2>Title.</h2>
-    <p style="color: var(--muted);">Subtitle.</p>
-  </div>
-  <div class="hline">
-    <!-- hline between header and body -->
-    <!-- content rows or grid -->
-  </div>
-</section>
-```
-
-### Side-label + row list (used in Providers, Contribute)
-
-```html
-<section class="hline">
-  <div class="flex">
-    <div
-      style="width:280px; flex-shrink:0; border-right:1px solid var(--border);"
-      class="px-10 py-8"
-    >
-      <h2>Label.</h2>
-      <p style="color:var(--muted);">...</p>
-    </div>
-    <div class="flex-1">
-      <!-- rows separated by border-top: 1px solid var(--border) -->
-    </div>
-  </div>
-</section>
-```
-
-## Typography
-
-| Use                | Class / style                          |
-| ------------------ | -------------------------------------- |
-| Section headings   | `text-[28px] font-bold tracking-tight` |
-| Page headings (h1) | `text-[32px] font-bold tracking-tight` |
-| Body / subtitles   | `text-[14px]` + `color: var(--muted)`  |
-| Small body         | `text-[13px]` + `color: var(--muted)`  |
-| Row labels         | `text-[13.5px] font-semibold`          |
-| Monospace          | `font-mono text-[12px] text-zinc-300`  |
-
-Fonts: **Inter** (UI) and **JetBrains Mono** (code) — loaded from Google Fonts in `Layout.astro`.
-
-## Components
-
-### `.label`
-
-Small eyebrow text above section headings.
-
-```html
-<div class="label mb-3">SECTION NAME</div>
-```
-
-→ 10.5px, 700 weight, 0.1em letter-spacing, accent color.
-
-### `.badge`
-
-Flat pill with no border-radius. Use colour variants for meaning:
-
-```html
-<span class="badge badge-ok">sub</span>
-<!-- green -->
-<span class="badge badge-muted">dub</span>
-<!-- blue -->
-<span class="badge badge-warn">raw</span>
-<!-- orange -->
-<span class="badge" style="background:#6d28d9;color:#ede9fe">GraphQL</span>
-```
-
-### Inline code
-
-```html
-<code class="bg-white/[0.06] px-1.5 py-0.5 font-mono text-[11.5px]">DOMParser</code>
-```
-
-### Code blocks (`<pre>`)
-
-Hand-authored HTML with syntax-highlight classes, not a highlighting library:
-
-```
-.kw   → keywords (#c792ea)
-.str  → strings  (#c3e88d)
-.fn   → functions (#82aaff)
-.typ  → types    (#ffcb6b)
-.num  → numbers  (#f78c6c)
-.prop → props    (#89ddff)
-.cm   → comments (#546e7a, italic)
-.pun  → punctuation (#89ddff)
-```
-
-### CTAs / buttons
-
-Primary (white fill):
-
-```html
-<a
-  class="bg-white px-4 py-1.5 text-[12.5px] font-semibold text-black transition-colors hover:bg-zinc-100"
->
-  Get Started
-</a>
-```
-
-Secondary (bordered):
-
-```html
-<a
-  class="px-3 py-1.5 text-[12px] font-semibold transition-colors hover:text-white"
-  style="color:var(--muted); border:1px solid var(--border);"
->
-  View on GitHub ↗
-</a>
-```
-
-**No rounded corners on buttons.**
-
-## Background
-
-The dot-grid is on `<body>` via CSS. The `.frame` has `background-color: var(--bg)` to mask it inside the frame. Use `.show-dots` on a cell to reveal the grid inside it (used in the Demo section). `.dot-reveal` fades the grid from one corner using a mask.
-
-## Anti-patterns
-
-| Avoid                                                  | Use instead                                |
-| ------------------------------------------------------ | ------------------------------------------ |
-| `rounded-*` on any element                             | No border-radius                           |
-| `shadow-*` for elevation                               | Border lines                               |
-| Nested `<div>` cards with background + padding         | `.cell` in a flat grid                     |
-| Margin-based spacing between sections                  | `.hline` borders                           |
-| Inline colour values                                   | CSS vars (`var(--muted)`, `var(--border)`) |
-| `card`, `panel`, `box` abstractions                    | Direct grid markup                         |
-| Multiple nesting levels for visual grouping            | Single-level sections                      |
-| Global Tailwind utilities for spacing between sections | `.hline` + `py-8 px-10` pattern            |
-
-## File locations
-
-- Tokens + layout: `src/styles/base.css`
-- Component classes: `src/styles/components.css`
-- Sections: `src/components/sections/*.astro`
-- Icons: `src/components/icons/*.astro`
-- Page layout: `src/layouts/Layout.astro`
+- Tokens and base elements: `src/styles/base.css`
+- Landing and reusable page components: `src/styles/components.css`
+- Starlight documentation theme: `src/styles/starlight.css`
+- Landing sections: `src/components/sections/*.astro`
+- Hero WebGL scene: `src/components/islands/HeroBackground.tsx`
+- Page shell and metadata: `src/layouts/Layout.astro`

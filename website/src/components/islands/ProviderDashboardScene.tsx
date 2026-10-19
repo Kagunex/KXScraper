@@ -111,7 +111,7 @@ export default function ProviderDashboardScene() {
             width: 7,
             height: 7,
             borderRadius: '50%',
-            background: '#8b5cf6',
+            background: '#c6ff4a',
             display: 'inline-block',
           }}
         />
@@ -120,7 +120,7 @@ export default function ProviderDashboardScene() {
           style={{
             background: 'rgba(139,92,246,0.12)',
             border: '1px solid rgba(139,92,246,0.22)',
-            color: '#a78bfa',
+            color: '#c6ff4a',
             borderRadius: 4,
             padding: '2px 8px',
             fontSize: 11,

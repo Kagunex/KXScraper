@@ -1,21 +1,15 @@
 ---
-const { siteTitleHref, siteTitle } = Astro.locals.starlightRoute;
+import { CodeXml } from '@lucide/astro';
+const { siteTitleHref } = Astro.locals.starlightRoute;
 ---
 
-<a href={siteTitleHref} class="site-title">
-  <img src="/anime-sdk.svg" width="22" height="22" alt="anime-sdk logo" />
-  <span>{siteTitle}</span>
+<a href={siteTitleHref} class="site-title" aria-label="KXScraper documentation home">
+  <span class="site-title-mark"><CodeXml size={17} stroke-width={2.4} aria-hidden="true" /></span>
+  <span>KX<span class="site-title-accent">Scraper</span></span>
 </a>
 
 <style>
-  .site-title {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    font-size: var(--sl-text-h4);
-    font-weight: 600;
-    color: var(--sl-color-white);
-    text-decoration: none;
-    white-space: nowrap;
-  }
+  .site-title { display: inline-flex; align-items: center; gap: .55rem; color: var(--sl-color-white); font-size: var(--sl-text-h4); font-weight: 800; letter-spacing: -.045em; text-decoration: none; white-space: nowrap; }
+  .site-title-mark { display: grid; width: 27px; height: 27px; place-items: center; border: 1px solid #c6ff4a; background: #c6ff4a; color: #172000; }
+  .site-title-accent { color: #c6ff4a; }
 </style>

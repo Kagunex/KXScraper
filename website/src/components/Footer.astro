@@ -1,35 +1,22 @@
 ---
-import LogoIcon from './icons/LogoIcon.astro';
+import { BookOpen, CodeXml, GitBranch, LifeBuoy, Scale, Shield, ShieldAlert } from '@lucide/astro';
 ---
 
-<footer class="hline flex flex-wrap items-center justify-between gap-4 px-10 py-7">
-  <div class="flex items-center gap-3">
-    <div class="flex h-[20px] w-[20px] items-center justify-center bg-violet-500">
-      <LogoIcon size={9} />
-    </div>
-    <span class="text-[13px] font-semibold">anime-sdk</span>
-    <span class="text-[12px]" style="color: var(--muted);">· MIT</span>
+<footer class="site-footer">
+  <div class="footer-brand">
+    <span class="brand-mark"><CodeXml size={17} stroke-width={2.5} aria-hidden="true" /></span>
+    <span class="footer-brand-copy"><strong>KXScraper</strong>OPEN SOURCE · MIT LICENSE</span>
   </div>
-  <div class="flex flex-wrap items-center gap-6 text-[13px]" style="color: var(--muted);">
-    <a
-      href="https://github.com/hexxt-git/anime-sdk"
-      target="_blank"
-      class="transition-colors hover:text-white">GitHub</a
-    >
-    <a
-      href="https://github.com/hexxt-git/anime-sdk/blob/master/README.md"
-      target="_blank"
-      class="transition-colors hover:text-white">README</a
-    >
-    <a
-      href="https://github.com/hexxt-git/anime-sdk/issues"
-      target="_blank"
-      class="transition-colors hover:text-white">Issues</a
-    >
-    <span style="color: var(--border);">|</span>
-    <a href="/contact" class="transition-colors hover:text-white">Contact</a>
-    <a href="/terms" class="transition-colors hover:text-white">Terms</a>
-    <a href="/privacy" class="transition-colors hover:text-white">Privacy</a>
-    <a href="/dmca" class="transition-colors hover:text-white">DMCA</a>
+  <nav class="footer-links" aria-label="Footer navigation">
+    <a href="/docs/"><BookOpen size={13} aria-hidden="true" /> Documentation</a>
+    <a href="/contact"><LifeBuoy size={13} aria-hidden="true" /> Contact</a>
+    <a href="/terms"><Scale size={13} aria-hidden="true" /> Terms</a>
+    <a href="/privacy"><Shield size={13} aria-hidden="true" /> Privacy</a>
+    <a href="/dmca"><ShieldAlert size={13} aria-hidden="true" /> DMCA</a>
+    <a href="https://github.com/hexxt-git/anime-sdk" target="_blank" rel="noopener noreferrer"><GitBranch size={13} aria-hidden="true" /> GitHub</a>
+  </nav>
+  <div class="footer-bottom">
+    <span>Search. Resolve. Integrate.</span>
+    <span>One interface across upstream providers.</span>
   </div>
 </footer>

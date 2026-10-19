@@ -1,163 +1,44 @@
 ---
+import { ArrowRight, Braces, Database, FileCode, Globe, Network, Waypoints } from '@lucide/astro';
+
 const providers = [
-  {
-    id: 'animeparadise',
-    domain: 'animeparadise.moe',
-    languages: ['sub'],
-    method: 'REST API',
-    methodStyle: 'background:#065f46;color:#d1fae5',
-    tags: ['HLS', 'token-signed', 'VTT subs'],
-    description: `Clean <span class="fn">REST</span> API at api.animeparadise.moe. Episodes carry a signed <span class="typ">streamLink</span> token; final stream served by <span class="str">stream.animeparadise.moe</span> as a multi-quality HLS master, with external VTT subtitle tracks.`,
-  },
-  {
-    id: 'allmanga',
-    domain: 'allmanga.to',
-    languages: ['sub', 'dub'],
-    method: 'GraphQL API',
-    methodStyle: 'background:#6d28d9;color:#ede9fe',
-    tags: ['AES-CTR', 'mp4upload'],
-    description: `AllAnime <span class="fn">GraphQL</span> endpoint. Source URLs XOR-obfuscated then <span class="typ">AES-CTR</span>-decrypted; falls back through <span class="str">mp4upload</span> and wixmp shares.`,
-  },
-  {
-    id: 'gogoanime',
-    domain: 'anineko.to',
-    languages: ['sub'],
-    method: 'HTML scrape',
-    methodStyle: 'background:#1d4ed8;color:#dbeafe',
-    tags: ['vibeplayer', 'HLS'],
-    description: `Scrapes episode pages on anineko.to. Resolves <span class="fn">vibeplayer</span> embeds to a direct <span class="typ">HLS</span> manifest with proxy-aware chunk URI rewriting.`,
-  },
-  {
-    id: 'anikoto',
-    domain: 'anikototv.to',
-    languages: ['sub', 'dub'],
-    method: 'JSON API + Embed',
-    methodStyle: 'background:#f43f5e;color:#fff1f2',
-    tags: ['megaplay', 'HLS', 'VTT subs'],
-    description: `Combines <span class="str">anikototv.to</span> search with <span class="fn">anikotoapi.site</span> metadata. Resolves <span class="typ">megaplay.buzz</span> embeds to HLS streams with multi-language subtitle tracks.`,
-  },
-  {
-    id: 'megaplay',
-    domain: 'megaplay.buzz',
-    languages: ['sub', 'dub'],
-    method: 'AniList GraphQL',
-    methodStyle: 'background:#3b82f6;color:#eff6ff',
-    tags: ['AniList', 'universal', 'megaplay'],
-    description: `A universal resolver that uses <span class="fn">AniList GraphQL</span> for search and <span class="str">megaplay.buzz</span> for direct mapping. Useful for shows not yet indexed by site-specific providers.`,
-  },
-  {
-    id: 'goyabu',
-    domain: 'goyabu.io',
-    languages: ['pt-br'],
-    method: 'batchexecute RPC',
-    methodStyle: 'background:#c2410c;color:#ffedd5',
-    tags: ['Blogger', 'googlevideo'],
-    description: `Reads a Blogger token from player data, calls Google <span class="fn">batchexecute</span>, and decodes the response to a <span class="str">googlevideo.com</span> stream URL.`,
-  },
-  {
-    id: 'mangadex',
-    domain: 'mangadex.org',
-    languages: ['sub'],
-    method: 'JSON API',
-    methodStyle: 'background:#fbbf24;color:#451a03',
-    tags: ['covers', 'official'],
-    description: `Official <span class="fn">JSON</span> API at api.mangadex.org. High-quality manga metadata, cover art, and high-resolution page resolution for all chapters.`,
-  },
-  {
-    id: 'weebcentral',
-    domain: 'weebcentral.com',
-    languages: ['sub'],
-    method: 'HTML scrape',
-    methodStyle: 'background:#3b82f6;color:#eff6ff',
-    tags: ['DOM', 'Referer'],
-    description: `Scrapes <span class="str">weebcentral.com</span>. Extracts high-quality chapter image pages with <span class="typ">Referer</span> protection and automatic proxy routing.`,
-  },
-  {
-    id: 'mangapill',
-    domain: 'mangapill.com',
-    languages: ['sub'],
-    method: 'HTML scrape',
-    methodStyle: 'background:#ef4444;color:#fef2f2',
-    tags: ['DOM'],
-    description: `Scrapes <span class="str">mangapill.com</span>. Reliable extraction of chapter page lists and direct image sources for titles not found elsewhere.`,
-  },
+  { id: 'animeparadise', domain: 'animeparadise.moe', Icon: Network, languages: ['sub'], method: 'REST API', tags: ['HLS', 'token-signed', 'VTT subs'], description: `Clean <span class="fn">REST</span> API at api.animeparadise.moe. Episodes carry a signed <span class="typ">streamLink</span> token; final stream served by <span class="str">stream.animeparadise.moe</span> as a multi-quality HLS master, with external VTT subtitle tracks.` },
+  { id: 'allmanga', domain: 'allmanga.to', Icon: Braces, languages: ['sub', 'dub'], method: 'GraphQL API', tags: ['AES-CTR', 'mp4upload'], description: `AllAnime <span class="fn">GraphQL</span> endpoint. Source URLs XOR-obfuscated then <span class="typ">AES-CTR</span>-decrypted; falls back through <span class="str">mp4upload</span> and wixmp shares.` },
+  { id: 'gogoanime', domain: 'anineko.to', Icon: Globe, languages: ['sub'], method: 'HTML scrape', tags: ['vibeplayer', 'HLS'], description: `Scrapes episode pages on anineko.to. Resolves <span class="fn">vibeplayer</span> embeds to a direct <span class="typ">HLS</span> manifest with proxy-aware chunk URI rewriting.` },
+  { id: 'anikoto', domain: 'anikototv.to', Icon: Waypoints, languages: ['sub', 'dub'], method: 'JSON API + Embed', tags: ['megaplay', 'HLS', 'VTT subs'], description: `Combines <span class="str">anikototv.to</span> search with <span class="fn">anikotoapi.site</span> metadata. Resolves <span class="typ">megaplay.buzz</span> embeds to HLS streams with multi-language subtitle tracks.` },
+  { id: 'megaplay', domain: 'megaplay.buzz', Icon: Database, languages: ['sub', 'dub'], method: 'AniList GraphQL', tags: ['AniList', 'universal', 'megaplay'], description: `A universal resolver that uses <span class="fn">AniList GraphQL</span> for search and <span class="str">megaplay.buzz</span> for direct mapping. Useful for shows not yet indexed by site-specific providers.` },
+  { id: 'goyabu', domain: 'goyabu.io', Icon: FileCode, languages: ['pt-br'], method: 'batchexecute RPC', tags: ['Blogger', 'googlevideo'], description: `Reads a Blogger token from player data, calls Google <span class="fn">batchexecute</span>, and decodes the response to a <span class="str">googlevideo.com</span> stream URL.` },
+  { id: 'mangadex', domain: 'mangadex.org', Icon: Database, languages: ['manga'], method: 'JSON API', tags: ['covers', 'official'], description: `Official <span class="fn">JSON</span> API at api.mangadex.org. High-quality manga metadata, cover art, and high-resolution page resolution for all chapters.` },
+  { id: 'weebcentral', domain: 'weebcentral.com', Icon: Globe, languages: ['manga'], method: 'HTML scrape', tags: ['DOM', 'Referer'], description: `Scrapes <span class="str">weebcentral.com</span>. Extracts high-quality chapter image pages with <span class="typ">Referer</span> protection and automatic proxy routing.` },
+  { id: 'mangapill', domain: 'mangapill.com', Icon: FileCode, languages: ['manga'], method: 'HTML scrape', tags: ['DOM'], description: `Scrapes <span class="str">mangapill.com</span>. Reliable extraction of chapter page lists and direct image sources for titles not found elsewhere.` },
 ];
 ---
 
-<style>
-  .provider-scroll::-webkit-scrollbar {
-    width: 3px;
-  }
-  .provider-scroll::-webkit-scrollbar-track {
-    background: transparent;
-  }
-  .provider-scroll::-webkit-scrollbar-thumb {
-    background: rgba(255, 255, 255, 0.12);
-    border-radius: 2px;
-  }
-</style>
-
-<section id="providers" class="hline">
-  <div class="flex flex-col sm:flex-row">
-    <div
-      class="flex flex-col border-b px-8 py-6 sm:w-[280px] sm:flex-shrink-0 sm:border-r sm:border-b-0"
-      style="border-color: var(--border);"
-    >
-      <h2 class="mb-2 text-[28px] font-bold tracking-tight">Providers.</h2>
-      <p class="text-[13px] leading-relaxed" style="color: var(--muted);">
-        {providers.length} live-tested sources. Each one verified by a real ffmpeg frame capture on every
-        run.
-      </p>
+<section id="providers" class="reveal" aria-labelledby="providers-title">
+  <div class="section-head section-head-split">
+    <div>
+      <div class="section-kicker">05 / Source adapters</div>
+      <h2 class="section-heading" id="providers-title">Nine providers.<br />One calling pattern.</h2>
     </div>
-
-    <div class="relative flex-1">
-      <div class="provider-scroll overflow-y-auto" style="max-height: 225px;">
-        {
-          providers.map((p, i) => (
-            <div
-              class="flex flex-wrap items-start gap-x-6 gap-y-2 px-8 py-4"
-              style={i > 0 ? 'border-top: 1px solid var(--border)' : ''}
-            >
-              <div style="min-width: 110px; width: 110px;">
-                <div class="text-[13.5px] font-semibold">{p.id}</div>
-                <div class="mt-0.5 font-mono text-[10px]" style="color: var(--muted);">
-                  {p.domain}
-                </div>
-              </div>
-
-              <p
-                class="flex-1 text-[12px] leading-relaxed sm:min-w-[180px]"
-                style="color: var(--muted);"
-                set:html={p.description}
-              />
-
-              <div class="flex w-full flex-wrap items-center gap-2 sm:w-auto sm:flex-shrink-0">
-                <span class="badge" style={p.methodStyle}>
-                  {p.method}
-                </span>
-                {p.tags.map((t) => (
-                  <span
-                    class="px-1.5 py-px font-mono text-[9px]"
-                    style="background:rgba(255,255,255,0.07);color:var(--muted);"
-                  >
-                    {t}
-                  </span>
-                ))}
-
-                {p.languages.map((l) => (
-                  <span class="badge badge-ok">{l}</span>
-                ))}
-              </div>
-            </div>
-          ))
-        }
-      </div>
-
-      <div
-        class="pointer-events-none absolute right-0 bottom-0 left-0"
-        style="height: 48px; background: linear-gradient(to top, var(--bg), transparent);"
-      >
-      </div>
+    <div>
+      <p class="section-intro">Anime and manga sources behind a shared search, content lookup, and resolution interface.</p>
+      <a href="/docs/providers/" class="text-link">Browse provider documentation <ArrowRight size={15} aria-hidden="true" /></a>
     </div>
+  </div>
+  <div class="provider-list">
+    {providers.map(({ id, domain, Icon, languages, method, tags, description }, index) => (
+      <article class="provider-row">
+        <div class="provider-identity">
+          <span class="glyph"><Icon aria-hidden="true" /></span>
+          <div><div class="provider-name"><span class="provider-index">0{index + 1}</span>{id}</div><div class="provider-domain">{domain}</div></div>
+        </div>
+        <p class="provider-description" set:html={description} />
+        <div class="provider-meta">
+          <span class="provider-tag provider-method"><Braces size={11} aria-hidden="true" /> {method}</span>
+          {tags.map((tag) => <span class="provider-tag">{tag}</span>)}
+          {languages.map((language) => <span class="provider-tag provider-language">{language}</span>)}
+        </div>
+      </article>
+    ))}
   </div>
 </section>

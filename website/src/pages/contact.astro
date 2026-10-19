@@ -2,6 +2,7 @@
 import Layout from '../layouts/Layout.astro';
 import Nav from '../components/Nav.astro';
 import Footer from '../components/Footer.astro';
+import { LifeBuoy } from '@lucide/astro';
 
 const channels = [
   {
@@ -19,8 +20,8 @@ const channels = [
   {
     label: 'Contributing',
     badge: 'Contributing Guide',
-    badgeHref: '/docs/docs/contributing',
-    body: 'Read the <a href="/docs/docs/contributing" class="underline underline-offset-2 transition-colors hover:text-white">contributing guide</a> before opening a pull request. New providers need a live E2E test that screenshots a real stream — patches without one will not be merged.',
+    badgeHref: '/docs/contributing/',
+    body: 'Read the <a href="/docs/contributing/" class="underline underline-offset-2 transition-colors hover:text-white">contributing guide</a> before opening a pull request. New providers need a live E2E test that screenshots a real stream — patches without one will not be merged.',
   },
   {
     label: 'Security vulnerabilities',
@@ -31,32 +32,32 @@ const channels = [
     label: 'Legal & DMCA',
     badge: 'DMCA Page',
     badgeHref: '/dmca',
-    body: 'See the <a href="/dmca" class="underline underline-offset-2 transition-colors hover:text-white">DMCA page</a> before reaching out. anime-sdk does not host content — notices about content on upstream sites must go to those sites directly.',
+    body: 'See the <a href="/dmca" class="underline underline-offset-2 transition-colors hover:text-white">DMCA page</a> before reaching out. KXScraper does not host content — notices about content on upstream sites must go to those sites directly.',
   },
 ];
 ---
 
 <Layout
-  title="Contact — anime-sdk"
-  description="How to reach the anime-sdk team. Bug reports, security disclosures, legal questions, and contributing."
+  title="Contact — KXScraper"
+  description="How to reach the KXScraper maintainers for bug reports, security disclosures, legal questions, and contributions."
   ogImage="/og/contact.png"
 >
   <div class="font-sans text-white">
-    <div class="frame">
+    <div class="frame legal-page">
       <Nav />
 
-      <div class="hline px-10 py-8">
-        <div class="label mb-3">CONTACT</div>
-        <h1 class="mb-2 text-[32px] font-bold tracking-tight">Get in touch.</h1>
+      <div class="legal-title">
+        <div class="label"><LifeBuoy size={14} aria-hidden="true" /> CONTACT</div>
+        <h1>Get in touch.</h1>
         <p class="text-[14px]" style="color: var(--muted);">
-          anime-sdk is maintained on GitHub. Use the right channel and you will get a faster
+          KXScraper is maintained on GitHub. Use the right channel and you will get a faster
           response.
         </p>
       </div>
 
       {
         channels.map((c) => (
-          <div class="hline px-10 py-6">
+          <div class="legal-row">
             <div class="mb-2 flex items-center gap-3">
               <span class="text-[14px] font-semibold">{c.label}</span>
               {c.badgeHref ? (

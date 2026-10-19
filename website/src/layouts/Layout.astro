@@ -9,8 +9,8 @@ interface Props {
 }
 
 const {
-  title = 'anime-sdk: Typescript SDK for building anime apps.',
-  description = ' A TypeScript library for resolving anime streams and manga pages across 9 providers. Use it as a Node module, run the built-in HTTP server, or download episodes and chapters to disk.',
+  title = 'KXScraper — Anime and manga scraping toolkit',
+  description = 'Search anime and manga catalogs, resolve streams and subtitle tracks, and expose providers through a TypeScript SDK or HTTP API.',
   ogImage,
 } = Astro.props;
 
@@ -22,6 +22,7 @@ const ogImageUrl = ogImage ? new URL(ogImage, Astro.site ?? Astro.url).href : un
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#111310" />
     <title>{title}</title>
     <meta name="description" content={description} />
     {ogImageUrl && <meta property="og:title" content={title} />}
@@ -32,25 +33,37 @@ const ogImageUrl = ogImage ? new URL(ogImage, Astro.site ?? Astro.url).href : un
     {ogImageUrl && <meta property="og:image:type" content="image/png" />}
     {ogImageUrl && <meta name="twitter:card" content="summary_large_image" />}
     {ogImageUrl && <meta name="twitter:image" content={ogImageUrl} />}
-    <link rel="icon" type="image/svg+xml" href="/anime-sdk.svg" />
-    <link rel="icon" type="image/x-icon" href="/anime-sdk.ico" />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500&display=swap"
-      rel="stylesheet"
-    />
+    <link rel="icon" type="image/svg+xml" href="/kxscraper.svg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet" />
   </head>
   <body>
     <slot />
     <script>
-      document.querySelectorAll('a[href^="#"]').forEach((a) => {
-        a.addEventListener('click', (e) => {
-          const href = a.getAttribute('href');
-          if (href) {
-            const t = document.querySelector(href);
-            if (t) {
-              e.preventDefault();
-              t.scrollIntoView({ behavior: 'smooth' });
+      document.documentElement.classList.add('js-reveal');
+      const revealItems = document.querySelectorAll<HTMLElement>('.reveal');
+      if ('IntersectionObserver' in window && !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+        const revealObserver = new IntersectionObserver((entries, observer) => {
+          for (const entry of entries) {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('is-visible');
+              observer.unobserve(entry.target);
             }
+          }
+        }, { threshold: 0.08 });
+        revealItems.forEach((item) => revealObserver.observe(item));
+      } else {
+        revealItems.forEach((item) => item.classList.add('is-visible'));
+      }
+
+      document.querySelectorAll<HTMLAnchorElement>('a[href^="#"]').forEach((link) => {
+        link.addEventListener('click', (event) => {
+          const href = link.getAttribute('href');
+          const target = href ? document.querySelector(href) : null;
+          if (target) {
+            event.preventDefault();
+            target.scrollIntoView({ behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth' });
           }
         });
       });

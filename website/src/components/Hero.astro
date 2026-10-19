@@ -1,64 +1,25 @@
 ---
+import { ArrowDown, ArrowRight, GitBranch, Radio, Terminal } from '@lucide/astro';
 import HeroBackground from './islands/HeroBackground';
-import HeroStats from './HeroStats.astro';
-import Notification from './islands/Notification';
 ---
 
-<!-- HERO -->
-<section style="position: relative; overflow: hidden; min-height: 560px;">
-  <HeroBackground client:load />
-  <Notification client:load />
-
-  <!-- Vignette: bottom fade -->
-  <div
-    style="position: absolute; inset: 0; pointer-events: none; z-index: 1; background: linear-gradient(to bottom, #111113 0%, transparent 28%, transparent 48%, rgba(17,17,19,0.88) 75%, #111113 100%);"
-  >
-  </div>
-  <!-- Vignette: left fade -->
-  <div
-    style="position: absolute; inset: 0; pointer-events: none; z-index: 1; background: linear-gradient(to right, #111113 0%, rgba(17,17,19,0.5) 18%, transparent 40%);"
-  >
-  </div>
-  <!-- Vignette: right fade -->
-  <div
-    style="position: absolute; inset: 0; pointer-events: none; z-index: 1; background: linear-gradient(to left, #111113 0%, transparent 30%);"
-  >
-  </div>
-
-  <!-- Content -->
-  <div
-    style="position: relative; z-index: 2; display: flex; flex-direction: column; align-items: center; text-align: center; padding: 120px 40px 90px;"
-  >
-    <div class="label mb-5">TypeScript · MIT · Node 20+</div>
-    <h1
-      class="mb-5 leading-[1.0] font-black tracking-[-0.03em]"
-      style="font-size: clamp(40px, 5vw, 58px); max-width: 680px;"
-    >
-      Build your anime app.
-      <br />
-      <span class="gradient-text">We'll handle the streams.</span>
-    </h1>
-    <p class="mb-8 text-[14.5px] leading-[1.75]" style="color: var(--muted); max-width: 460px;">
-      A TypeScript library for resolving anime streams and manga pages across 9 providers. Use it as
-      a Node module, run the built-in HTTP server, or download episodes and chapters to disk.
+<section class="hero" aria-labelledby="hero-title">
+  <HeroBackground client:visible />
+  <div class="hero-copy">
+    <div class="eyebrow"><Radio size={14} stroke-width={2} aria-hidden="true" /> Open-source media tooling</div>
+    <h1 id="hero-title">One interface.<br /><span class="accent-line">Every source.</span></h1>
+    <p>
+      KXScraper searches anime and manga catalogs, resolves playable streams and subtitle tracks, and exposes the same workflow through a TypeScript SDK or HTTP API.
     </p>
-    <div class="flex items-center gap-4">
-      <a
-        href="/docs"
-        class="bg-white px-5 py-2.5 text-[13px] font-semibold text-black transition-colors hover:bg-zinc-100"
-      >
-        Get started →
-      </a>
-      <a
-        href="https://github.com/hexxt-git/anime-sdk"
-        target="_blank"
-        class="text-[13px] font-medium transition-colors hover:text-white"
-        style="color: var(--muted);"
-      >
-        View on GitHub ↗
-      </a>
+    <div class="hero-actions">
+      <a href="/docs/" class="action">Read the documentation <ArrowRight size={16} stroke-width={2.2} aria-hidden="true" /></a>
+      <a href="https://github.com/hexxt-git/anime-sdk" target="_blank" rel="noopener noreferrer" class="action action-secondary"><GitBranch size={16} stroke-width={2} aria-hidden="true" /> View repository</a>
+    </div>
+    <div class="hero-meta" aria-label="Project details">
+      <span class="badge badge-ok"><span class="status-dot" aria-hidden="true"></span> MIT licensed</span>
+      <span class="badge"><Terminal size={12} stroke-width={2} aria-hidden="true" /> Node.js / Bun</span>
+      <a class="badge badge-muted" href="#capabilities"><ArrowDown size={12} aria-hidden="true" /> Explore capabilities</a>
     </div>
   </div>
+  <div class="hero-index" aria-hidden="true"><b>KX / 001</b> &nbsp;·&nbsp; SEARCH → RESOLVE → DELIVER</div>
 </section>
-
-<HeroStats />

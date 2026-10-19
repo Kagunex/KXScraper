@@ -1,39 +1,30 @@
 ---
-import GitHubIcon from './icons/GitHubIcon.astro';
+import { BookOpen, CodeXml, GitBranch, Network, Radio, Server, ShieldCheck } from '@lucide/astro';
 ---
 
-<nav
-  style="border-bottom: 1px solid var(--border); background: var(--bg); position: sticky; top: 0; z-index: 50;"
->
-  <div class="flex h-[50px] items-center justify-between px-10">
-    <div class="flex items-center gap-8">
-      <a href="/#" class="flex items-center gap-2">
-        <img src="/anime-sdk.svg" width="22" height="22" alt="anime-sdk logo" />
-        <span class="text-[13.5px] font-semibold tracking-tight">anime-sdk</span>
-      </a>
-      <div class="hidden items-center gap-6 md:flex" style="color: var(--muted); font-size: 13px;">
-        <a href="/docs/" class="transition-colors hover:text-white">Docs</a>
-        <a href="/#use-cases" class="transition-colors hover:text-white">Use Cases</a>
-        <a href="/#server" class="transition-colors hover:text-white">HTTP Server</a>
-        <a href="/faq" class="transition-colors hover:text-white">FAQ</a>
-      </div>
+<header class="site-nav">
+  <nav class="nav-inner" aria-label="Main navigation">
+    <a href="/" class="brand-lockup" aria-label="KXScraper home">
+      <span class="brand-mark"><CodeXml size={19} stroke-width={2.5} aria-hidden="true" /></span>
+      <span class="brand-name">KX<span>Scraper</span></span>
+    </a>
+    <div class="nav-links">
+      <a href="/docs/"><BookOpen size={14} aria-hidden="true" /> Docs</a>
+      <a href="/#capabilities"><Network size={14} aria-hidden="true" /> Capabilities</a>
+      <a href="/#server"><Server size={14} aria-hidden="true" /> HTTP API</a>
+      <a href="/#providers"><Radio size={14} aria-hidden="true" /> Providers</a>
+      <a href="/faq"><ShieldCheck size={14} aria-hidden="true" /> FAQ</a>
     </div>
-    <div class="flex items-center gap-4">
-      <a
-        href="https://github.com/hexxt-git/anime-sdk"
-        target="_blank"
-        class="flex items-center gap-1.5 text-[13px] transition-colors hover:text-white"
-        style="color: var(--muted);"
-      >
-        <GitHubIcon class="h-[15px] w-[15px]" />
-        GitHub
-      </a>
-      <a
-        href="/docs"
-        class="bg-white px-4 py-1.5 text-[12.5px] font-semibold text-black transition-colors hover:bg-zinc-100"
-      >
-        Get Started
-      </a>
+    <div class="nav-utilities">
+      <a class="nav-github" href="https://github.com/hexxt-git/anime-sdk" target="_blank" rel="noopener noreferrer" aria-label="KXScraper on GitHub"><GitBranch size={17} aria-hidden="true" /></a>
+      <a href="/docs/" class="action nav-cta">Start building <CodeXml size={14} aria-hidden="true" /></a>
     </div>
-  </div>
-</nav>
+  </nav>
+  <nav class="mobile-nav" aria-label="Mobile navigation">
+    <a href="/docs/"><BookOpen size={13} aria-hidden="true" /> Docs</a>
+    <a href="/#capabilities"><Network size={13} aria-hidden="true" /> Capabilities</a>
+    <a href="/#server"><Server size={13} aria-hidden="true" /> HTTP API</a>
+    <a href="/#providers"><Radio size={13} aria-hidden="true" /> Providers</a>
+    <a href="/faq"><ShieldCheck size={13} aria-hidden="true" /> FAQ</a>
+  </nav>
+</header>

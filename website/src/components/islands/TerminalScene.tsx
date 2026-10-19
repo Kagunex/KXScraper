@@ -137,7 +137,7 @@ export default function TerminalScene() {
           if (line.t === 'cmd')
             return (
               <div key={i} style={{ color: '#c4c4c4', marginBottom: 6 }}>
-                <span style={{ color: '#8b5cf6' }}>❯ </span>
+                <span style={{ color: '#c6ff4a' }}>&gt; </span>
                 {line.v}
               </div>
             );

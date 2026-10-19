@@ -1,33 +1,16 @@
 ---
-
+import { ArrowRight, BookOpen, GitBranch, GitPullRequest } from '@lucide/astro';
 ---
 
-<section id="contribute" class="hline">
-  <div class="px-10 py-10 text-center">
-    <h2 class="mb-1 text-[22px] font-bold tracking-tight">Contribute.</h2>
-    <p
-      class="mx-auto mb-4 text-[13px] leading-relaxed"
-      style="color: var(--muted); max-width: 420px;"
-    >
-      Add a provider in ~100 lines. Extend <code
-        class="bg-white/[0.06] px-1.5 py-0.5 font-mono text-[11px]">BaseProvider</code
-      >, implement three methods and write a test.
-    </p>
-    <div class="flex items-center justify-center gap-3">
-      <a
-        href="/docs/contributing/"
-        class="bg-white px-4 py-1.5 text-[12px] font-semibold text-black transition-colors hover:bg-zinc-200"
-      >
-        Read the guide →
-      </a>
-      <a
-        href="https://github.com/hexxt-git/anime-sdk"
-        target="_blank"
-        class="px-4 py-1.5 text-[12px] font-semibold transition-colors hover:text-white"
-        style="color: var(--muted); border: 1px solid var(--border);"
-      >
-        GitHub ↗
-      </a>
-    </div>
+<section id="contribute" class="contribute-section reveal" aria-labelledby="contribute-title">
+  <div class="contribute-mark" aria-hidden="true"><GitPullRequest size={34} stroke-width={1.5} /></div>
+  <div class="contribute-copy">
+    <div class="section-kicker">07 / Open source</div>
+    <h2 id="contribute-title">Make the next source easier to use.</h2>
+    <p>Add a provider by extending <code>BaseProvider</code>, implementing its search, content, and resolution methods, then documenting and testing the adapter.</p>
+  </div>
+  <div class="contribute-actions">
+    <a href="/docs/contributing/" class="action"><BookOpen size={15} aria-hidden="true" /> Read the contributor guide</a>
+    <a href="https://github.com/hexxt-git/anime-sdk" target="_blank" rel="noopener noreferrer" class="action action-secondary"><GitBranch size={15} aria-hidden="true" /> View source <ArrowRight size={14} aria-hidden="true" /></a>
   </div>
 </section>

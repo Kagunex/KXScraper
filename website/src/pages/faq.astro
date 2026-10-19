@@ -2,6 +2,7 @@
 import Layout from '../layouts/Layout.astro';
 import Nav from '../components/Nav.astro';
 import Footer from '../components/Footer.astro';
+import { CircleQuestionMark } from '@lucide/astro';
 
 const faqs = [
   {
@@ -56,19 +57,19 @@ const faqs = [
 ---
 
 <Layout
-  title="FAQ — anime-sdk"
-  description="Frequently asked questions about anime-sdk."
+  title="FAQ — KXScraper"
+  description="Answers about KXScraper providers, streams, subtitles, browser clients, and the HTTP API."
   ogImage="/og/faq.png"
 >
   <div class="font-sans text-white">
-    <div class="frame faq">
+    <div class="frame faq legal-page">
       <Nav />
 
-      <div class="hline px-10 py-8">
-        <div class="label mb-3">FAQ</div>
-        <h1 class="mb-2 text-[32px] font-bold tracking-tight">Frequently asked questions.</h1>
+      <div class="legal-title">
+        <div class="label"><CircleQuestionMark size={14} aria-hidden="true" /> HELP / FAQ</div>
+        <h1>Frequently asked questions.</h1>
         <p class="text-[14px]" style="color: var(--muted);">
-          Answers to common questions about anime-sdk. Missing something?
+          Answers to common questions about KXScraper. Missing something?
           <a
             href="https://github.com/hexxt-git/anime-sdk/issues"
             target="_blank"
@@ -80,8 +81,8 @@ const faqs = [
 
       {
         faqs.map((faq) => (
-          <div class="hline px-10 py-6">
-            <div class="mb-2 text-[14px] font-semibold">{faq.q}</div>
+          <div class="legal-row faq-row">
+            <div class="faq-question"><CircleQuestionMark size={15} aria-hidden="true" /> {faq.q}</div>
             <p
               class="text-[13px] leading-relaxed"
               style="color: var(--muted); max-width: 680px;"

@@ -8,9 +8,9 @@ export default defineConfig({
   server: { port: 4321 },
   integrations: [
     starlight({
-      title: 'anime-sdk',
-      description: 'Typescript SDK for building anime apps',
-      favicon: '/anime-sdk.ico',
+      title: 'KXScraper',
+      description: 'Search anime and manga sources, resolve streams and subtitle tracks, and serve a unified HTTP API.',
+      favicon: '/kxscraper.svg',
       social: [{ icon: 'github', label: 'GitHub', href: 'https://github.com/hexxt-git/anime-sdk' }],
       customCss: ['./src/styles/starlight.css'],
       components: {

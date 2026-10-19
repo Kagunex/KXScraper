@@ -20,7 +20,7 @@ async function getFonts() {
 
 export const pages: Record<string, { title: string; description: string; section?: string }> = {
   index: {
-    title: 'anime-sdk',
+    title: 'KXScraper',
     description:
       'Nine providers. A pluggable HTTP transport. An optional proxy server. Ship your anime app without touching a single stream URL.',
   },
@@ -33,13 +33,13 @@ export const pages: Record<string, { title: string; description: string; section
   'docs/index': {
     title: 'Getting Started',
     description:
-      'Install anime-sdk, shim DOMParser, pick a provider, and resolve your first stream in under ten lines of TypeScript.',
+      'Install the anime-sdk package, pick a provider, and resolve a stream through the KXScraper interface.',
     section: 'DOCS',
   },
   'docs/http-server': {
     title: 'HTTP Server',
     description:
-      'Expose every provider over REST — /search, /content, /stream, /tracks — so any language or frontend can call anime-sdk over HTTP.',
+      'Expose providers over REST — /search, /content, /stream, /tracks — so any language or frontend can use KXScraper over HTTP.',
     section: 'DOCS',
   },
   'docs/proxy': {
@@ -129,7 +129,7 @@ export const pages: Record<string, { title: string; description: string; section
   dmca: {
     title: 'DMCA',
     description:
-      'anime-sdk does not host content. It resolves publicly accessible URLs from third-party sites.',
+      'KXScraper does not host content. It resolves publicly accessible URLs from third-party sites.',
     section: 'LEGAL',
   },
   terms: {
@@ -153,9 +153,9 @@ export const pages: Record<string, { title: string; description: string; section
 };
 
 const BORDER = 'rgba(255,255,255,0.08)';
-const ACCENT = '#8b5cf6';
+const ACCENT = '#c6ff4a';
 const MUTED = '#6b7280';
-const BG = '#111113';
+const BG = '#111310';
 
 function buildImage(title: string, description: string, section?: string) {
   const dots = Array.from({ length: 198 }, () =>
@@ -193,7 +193,7 @@ function buildImage(title: string, description: string, section?: string) {
       h(
         'span',
         { style: { color: ACCENT, fontSize: 14, fontWeight: 700, letterSpacing: '0.1em' } },
-        'anime-sdk',
+        'KXScraper',
       ),
       h(
         'span',

@@ -2,19 +2,20 @@
 import Layout from '../layouts/Layout.astro';
 import Nav from '../components/Nav.astro';
 import Footer from '../components/Footer.astro';
+import { ShieldAlert } from '@lucide/astro';
 
 const sections = [
   {
-    heading: 'What anime-sdk is',
-    body: 'anime-sdk is an open-source TypeScript SDK that resolves publicly accessible stream URLs from third-party websites. It does not host, store, cache, or distribute any media content. All content is served directly by those third-party sites — anime-sdk only provides the resolution logic.',
+    heading: 'What KXScraper is',
+    body: 'KXScraper is an open-source TypeScript SDK that resolves publicly accessible stream URLs from third-party websites. It does not host, store, cache, or distribute any media content. All content is served directly by those third-party sites — KXScraper only provides the resolution logic.',
   },
   {
     heading: 'Infringement on third-party sites',
-    body: 'If you believe copyrighted content is being served by one of the upstream sites, you must contact those sites directly. anime-sdk has no control over and no affiliation with any of them. Filing a DMCA notice here will not result in content removal from those platforms.',
+    body: 'If you believe copyrighted content is being served by one of the upstream sites, you must contact those sites directly. KXScraper has no control over and no affiliation with any of them. Filing a DMCA notice here will not result in content removal from those platforms.',
   },
   {
     heading: 'Infringement in the SDK itself',
-    body: 'If you believe the anime-sdk codebase, documentation, or this website infringes your copyright, you may file a notice. Your notice must include: (1) your legal name and contact information; (2) a description of the copyrighted work; (3) the specific URL or file in this repository that you believe infringes; (4) a statement that you have a good faith belief that the use is not authorised; (5) a statement made under penalty of perjury that the information is accurate and you are the rights holder or authorised to act on their behalf.',
+    body: 'If you believe the KXScraper codebase, documentation, or this website infringes your copyright, you may file a notice. Your notice must include: (1) your legal name and contact information; (2) a description of the copyrighted work; (3) the specific URL or file in this repository that you believe infringes; (4) a statement that you have a good faith belief that the use is not authorised; (5) a statement made under penalty of perjury that the information is accurate and you are the rights holder or authorised to act on their behalf.',
   },
   {
     heading: 'Counter-notices',
@@ -28,26 +29,26 @@ const sections = [
 ---
 
 <Layout
-  title="DMCA — anime-sdk"
-  description="DMCA policy for anime-sdk. anime-sdk does not host content — it resolves publicly accessible URLs from third-party sites."
+  title="DMCA — KXScraper"
+  description="DMCA policy for KXScraper, an open-source media resolver that does not host content."
   ogImage="/og/dmca.png"
 >
   <div class="font-sans text-white">
-    <div class="frame">
+    <div class="frame legal-page">
       <Nav />
 
-      <div class="hline px-10 py-8">
-        <div class="label mb-3">LEGAL</div>
-        <h1 class="mb-2 text-[32px] font-bold tracking-tight">DMCA Notice.</h1>
+      <div class="legal-title">
+        <div class="label"><ShieldAlert size={14} aria-hidden="true" /> LEGAL / DMCA</div>
+        <h1>DMCA Notice.</h1>
         <p class="text-[14px]" style="color: var(--muted);">
-          anime-sdk does not host, store, or distribute any media content. Read below before filing
+          KXScraper does not host, store, or distribute any media content. Read below before filing
           a notice.
         </p>
       </div>
 
       {
         sections.map((s) => (
-          <div class="hline px-10 py-6">
+          <div class="legal-row">
             <div class="mb-2 text-[14px] font-semibold">{s.heading}</div>
             <p
               class="text-[13px] leading-relaxed"

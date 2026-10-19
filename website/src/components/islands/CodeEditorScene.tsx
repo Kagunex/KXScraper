@@ -115,7 +115,7 @@ export default function CodeEditorScene() {
             fontFamily: '"JetBrains Mono", monospace',
           }}
         >
-          TypeScript / anime-sdk
+          TypeScript / KXScraper
         </span>
       </div>
       <div

@@ -1,0 +1,31 @@
+---
+import { ArrowRight, Captions, CirclePlay, ListVideo, Search } from '@lucide/astro';
+
+const steps = [
+  { label: 'Search titles', detail: 'Search anime and manga catalogs through a selected provider.', Icon: Search, endpoint: '/search' },
+  { label: 'Choose a unit', detail: 'Fetch the episode or chapter list for a matching title.', Icon: ListVideo, endpoint: '/content' },
+  { label: 'Resolve media', detail: 'Resolve a playable stream or manga page set on demand.', Icon: CirclePlay, endpoint: '/stream' },
+  { label: 'Read tracks', detail: 'Return external subtitle metadata where the source provides it.', Icon: Captions, endpoint: '/tracks' },
+];
+---
+
+<section class="pipeline-section reveal" aria-labelledby="pipeline-title">
+  <div class="section-head section-head-split">
+    <div>
+      <div class="section-kicker">02 / The request path</div>
+      <h2 class="section-heading" id="pipeline-title">From title search to a playable result.</h2>
+    </div>
+    <p class="section-intro">Each step returns normalized data, so client code can follow the same path across supported providers.</p>
+  </div>
+  <ol class="pipeline-list">
+    {steps.map(({ label, detail, Icon, endpoint }, index) => (
+      <li class="pipeline-step">
+        <span class="pipeline-index">0{index + 1}</span>
+        <span class="pipeline-icon"><Icon size={19} stroke-width={1.9} aria-hidden="true" /></span>
+        <div class="pipeline-copy"><h3>{label}</h3><p>{detail}</p></div>
+        <code>{endpoint}</code>
+        {index < steps.length - 1 && <ArrowRight class="pipeline-arrow" size={15} aria-hidden="true" />}
+      </li>
+    ))}
+  </ol>
+</section>
