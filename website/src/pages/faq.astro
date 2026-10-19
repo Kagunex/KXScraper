@@ -1,0 +1,97 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Nav from '../components/Nav.astro';
+import Footer from '../components/Footer.astro';
+
+const faqs = [
+  {
+    q: 'What is the fastest way to get started?',
+    a: 'Clone <a href="https://github.com/hexxt-git/anime-sdk/tree/master/examples" target="_blank" class="underline underline-offset-2 transition-colors hover:text-white">github.com/hexxt-git/anime-sdk/tree/master/examples</a>. Build the SDK: <code>npm run build</code>. Start the server: <code>node examples/server.mjs</code>. Run the website: <code>cd examples/website && npm install && npm run dev</code>.',
+  },
+  {
+    q: 'Can I use anime-sdk in a browser app?',
+    a: 'No. anime-sdk runs in Node or Bun only. For a browser frontend, run the built-in HTTP server on your backend and call it over HTTP from the client. Set proxy: true when starting the server — it rewrites stream URLs so your frontend never has to deal with CDN headers or CORS.',
+  },
+  {
+    q: 'I got a sourceUrl back from resolveStream. How do I play it?',
+    a: "Check isHLS. If true, the URL is an HLS stream — use hls.js on Chrome or Firefox, or a native &lt;video&gt; on Safari. If false, it's a plain MP4 you can set directly as the video source. If you're running the HTTP server with proxy: true, all of this is handled for you and the URL just works.",
+  },
+  {
+    q: 'Which provider should I use?',
+    a: 'For general anime, start with AllManga — widest catalogue, sub and dub, stable API. AnimeParadise is the best pick when you need external subtitle tracks. Gogoanime is a solid fallback for titles AllManga is missing. Goyabu is the only option for Brazilian Portuguese. For manga, MangaDex first, then WeebCentral or Mangapill.',
+  },
+  {
+    q: 'Which providers have dubbed anime?',
+    a: "AllManga, Anikoto, and MegaPlay support sub and dub. Goyabu is Brazilian Portuguese dub only. Gogoanime and AnimeParadise are sub-only. Pass the language when calling resolveStream — if a provider doesn't support what you asked for, it falls back to sub.",
+  },
+  {
+    q: 'Do stream URLs expire?',
+    a: 'Yes, usually within minutes. Resolve streams on demand when the user wants to play something — do not cache them. Search results and episode lists are safe to cache; stream URLs are not.',
+  },
+  {
+    q: 'Can I use anime-sdk without TypeScript?',
+    a: 'Yes. The package ships as compiled JavaScript with type declarations alongside. Use ESM (import) or CommonJS (require) — TypeScript is not required either way.',
+  },
+  {
+    q: 'Is anime-sdk legal to use?',
+    a: 'anime-sdk resolves stream URLs from sites that host content publicly. It does not bypass DRM or crack paywalls. Whether your specific use is legal depends on your jurisdiction and what you are building — a personal tool is a different situation from a public redistribution service.',
+  },
+  {
+    q: 'What happens when a provider goes down?',
+    a: 'Swap it out. All providers share the same three-method interface, so switching is a one-line import change. The live E2E tests hit real endpoints and fail the moment an upstream site breaks, which is how we catch when a provider needs updating.',
+  },
+  {
+    q: 'Can I download episodes and chapters to disk?',
+    a: 'Yes. downloadVideo saves an episode as an MP4, downloadMangaChapter saves a chapter as a ZIP. Both are exported from anime-sdk. The HTTP server also has /download endpoints that stream progress back via SSE so you can show a progress bar.',
+  },
+  {
+    q: 'What does the proxy do?',
+    a: "The /proxy endpoint in the HTTP server fetches any URL on the server's behalf, attaching whatever headers the CDN requires. When you start the server with proxy: true, stream and subtitle URLs are automatically rewritten to go through it. Browser clients just use the URL directly — no extra headers needed, no CORS issues.",
+  },
+  {
+    q: 'Does anime-sdk cache anything?',
+    a: 'Not on its own. The HTTP server accepts a cache object with get and set methods — a plain Map, Redis, SQLite, anything works. Search results and episode lists are safe to cache for a long time. Do not cache stream URLs.',
+  },
+];
+---
+
+<Layout
+  title="FAQ — anime-sdk"
+  description="Frequently asked questions about anime-sdk."
+  ogImage="/og/faq.png"
+>
+  <div class="font-sans text-white">
+    <div class="frame faq">
+      <Nav />
+
+      <div class="hline px-10 py-8">
+        <div class="label mb-3">FAQ</div>
+        <h1 class="mb-2 text-[32px] font-bold tracking-tight">Frequently asked questions.</h1>
+        <p class="text-[14px]" style="color: var(--muted);">
+          Answers to common questions about anime-sdk. Missing something?
+          <a
+            href="https://github.com/hexxt-git/anime-sdk/issues"
+            target="_blank"
+            class="underline underline-offset-2 transition-colors hover:text-white"
+            >Open an issue.</a
+          >
+        </p>
+      </div>
+
+      {
+        faqs.map((faq) => (
+          <div class="hline px-10 py-6">
+            <div class="mb-2 text-[14px] font-semibold">{faq.q}</div>
+            <p
+              class="text-[13px] leading-relaxed"
+              style="color: var(--muted); max-width: 680px;"
+              set:html={faq.a}
+            />
+          </div>
+        ))
+      }
+
+      <Footer />
+    </div>
+  </div>
+</Layout>

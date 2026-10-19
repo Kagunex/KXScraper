@@ -1,0 +1,74 @@
+---
+const megaplayCode = `<code><span class="kw">import</span> <span class="pun">{</span> <span class="typ">HttpClient</span><span class="pun">,</span> <span class="typ">MegaPlayProvider</span> <span class="pun">}</span> <span class="kw">from</span> <span class="str">'anime-sdk'</span><span class="pun">;</span>
+
+<span class="kw">const</span> provider <span class="pun">=</span> <span class="kw">new</span> <span class="fn">MegaPlayProvider</span><span class="pun">(</span>
+  <span class="kw">new</span> <span class="fn">HttpClient</span><span class="pun">({</span> timeoutMs<span class="pun">:</span> <span class="num">10_000</span> <span class="pun">})</span>
+<span class="pun">);</span>
+
+<span class="kw">const</span> shows   <span class="pun">=</span> <span class="kw">await</span> provider<span class="pun">.</span><span class="fn">search</span><span class="pun">(</span><span class="str">'Frieren'</span><span class="pun">);</span>
+<span class="kw">const</span> units   <span class="pun">=</span> <span class="kw">await</span> provider<span class="pun">.</span><span class="fn">fetchContentUnits</span><span class="pun">(</span>shows<span class="pun">[</span><span class="num">0</span><span class="pun">].</span>id<span class="pun">);</span>
+<span class="kw">const</span> result  <span class="pun">=</span> <span class="kw">await</span> provider<span class="pun">.</span><span class="fn">resolveStream</span><span class="pun">(</span>units<span class="pun">[</span><span class="num">0</span><span class="pun">].</span>id<span class="pun">);</span>
+
+<span class="kw">if</span> <span class="pun">(</span>result<span class="pun">.</span>type <span class="pun">===</span> <span class="str">'video'</span><span class="pun">)</span> console<span class="pun">.</span><span class="fn">log</span><span class="pun">(</span>result<span class="pun">.</span>streams<span class="pun">[</span><span class="num">0</span><span class="pun">].</span>sourceUrl<span class="pun">);</span>
+<span class="kw">if</span> <span class="pun">(</span>result<span class="pun">.</span>type <span class="pun">===</span> <span class="str">'manga'</span><span class="pun">)</span> console<span class="pun">.</span><span class="fn">log</span><span class="pun">(</span>result<span class="pun">.</span>pages<span class="pun">.</span>imageUrls<span class="pun">);</span></code>`;
+---
+
+<section id="demo">
+  <div class="hline px-10 py-8">
+    <h2 class="mb-1 text-[28px] font-bold tracking-tight">Setup in minutes.</h2>
+    <p class="text-[14px]" style="color: var(--muted);">
+      Every provider exposes{' '}
+      <code class="bg-white/[0.06] px-1.5 py-0.5 font-mono text-[11.5px]">search</code>
+      {' → '}
+      <code class="bg-white/[0.06] px-1.5 py-0.5 font-mono text-[11.5px]">fetchContentUnits</code>
+      {' → '}
+      <code class="bg-white/[0.06] px-1.5 py-0.5 font-mono text-[11.5px]">resolveStream</code>
+      . Swap the provider, the three calls don't change.
+    </p>
+  </div>
+
+  <div class="hline md:grid md:grid-cols-2">
+    <div class="cell no-bottom show-dots px-10 py-9">
+      <div class="mb-5 flex items-center gap-3">
+        <span class="badge badge-muted">Install</span>
+        <span class="font-mono text-[11px]" style="color: var(--muted);">terminal</span>
+      </div>
+      <pre
+        class="font-mono text-[12px] leading-[1.85] text-zinc-300"><code><span class="cm">$</span> npm install anime-sdk</code></pre>
+      <div class="mt-7 mb-5 flex items-center gap-3">
+        <span class="badge badge-ok">Provider · megaplay</span>
+        <span class="font-mono text-[11px]" style="color: var(--muted);">example.ts</span>
+      </div>
+      <pre class="font-mono text-[12px] leading-[1.85] text-zinc-300" set:html={megaplayCode} />
+      <p class="mt-5 text-[12px]" style="color: var(--muted);">
+        Want sub/dub? Pass{' '}
+        <code class="bg-white/[0.06] px-1.5 py-0.5 font-mono text-[11.5px]"
+          >'sub' | 'dub' | 'raw'</code
+        >
+        {' '}to{' '}
+        <code class="bg-white/[0.06] px-1.5 py-0.5 font-mono text-[11.5px]">resolveStream</code>
+        . Need a different source? Swap the provider; same three calls.
+      </p>
+    </div>
+    <div
+      class="cell no-right no-bottom max-md:h-96"
+      style="padding:0; position:relative; overflow:hidden;"
+    >
+      <video
+        autoplay
+        loop
+        controls
+        playsinline
+        style="position:absolute; inset:0; width:100%; height:100%; object-fit:cover; object-position:center;"
+        src="/anime-sdk-test.mp4"></video>
+      <a
+        href="https://github.com/hexxt-git/anime-sdk/tree/master/examples/website"
+        target="_blank"
+        rel="noopener noreferrer"
+        style="position:absolute; top:12px; right:12px; z-index:10; background:var(--bg); color:var(--muted); font-family:'JetBrains Mono',monospace; font-size:12px; font-weight:600; letter-spacing:0.06em; padding:4px 10px; text-decoration:none; transition:color 0.15s;"
+        onmouseover="this.style.color='#fff'"
+        onmouseout="this.style.color='var(--muted)'">demo website ↗</a
+      >
+    </div>
+  </div>
+</section>

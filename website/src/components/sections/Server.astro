@@ -1,0 +1,79 @@
+---
+const serverStartCode = `<code><span class="kw">import</span> <span class="pun">{</span> <span class="typ">startServer</span><span class="pun">,</span> <span class="typ">AllmangaProvider</span><span class="pun">,</span> <span class="typ">HttpClient</span> <span class="pun">}</span> <span class="kw">from</span> <span class="str">'anime-sdk'</span><span class="pun">;</span>
+
+<span class="kw">const</span> store <span class="pun">=</span> <span class="kw">new</span> <span class="fn">Map</span><span class="pun">();</span>
+
+<span class="fn">startServer</span><span class="pun">({</span>
+  providers<span class="pun">:</span> <span class="pun">[</span><span class="kw">new</span> <span class="fn">AllmangaProvider</span><span class="pun">(</span><span class="kw">new</span> <span class="fn">HttpClient</span><span class="pun">())],</span>
+  port<span class="pun">:</span> <span class="num">3000</span><span class="pun">,</span>
+  proxy<span class="pun">:</span> <span class="kw">true</span><span class="pun">,</span>
+  cache<span class="pun">:</span> <span class="pun">{</span> get<span class="pun">:</span> <span class="pun">(</span>k<span class="pun">)</span> =&gt; store<span class="pun">.</span><span class="fn">get</span><span class="pun">(</span>k<span class="pun">),</span> set<span class="pun">:</span> <span class="pun">(</span>k<span class="pun">,</span> v<span class="pun">)</span> =&gt; store<span class="pun">.</span><span class="fn">set</span><span class="pun">(</span>k<span class="pun">,</span> v<span class="pun">)</span> <span class="pun">},</span>
+<span class="pun">});</span>
+
+<span class="cm">// → http://localhost:3000</span></code>`;
+
+const serverCurlCode = `<code><span class="cm"># search shows or manga</span>
+curl <span class="str">'localhost:3000/search?q=Frieren&amp;provider=mangadex'</span>
+
+<span class="cm"># content: episodes or chapters</span>
+curl <span class="str">'localhost:3000/content?mediaId=...&amp;provider=mangadex'</span>
+
+<span class="cm"># resolve: streams or image pages</span>
+curl <span class="str">'localhost:3000/stream?unitId=...&amp;provider=mangadex'</span></code>`;
+
+const serverAuthCode = `<code><span class="fn">startServer</span><span class="pun">({</span>
+  providers<span class="pun">:</span> <span class="pun">[</span><span class="kw">new</span> <span class="fn">AllmangaProvider</span><span class="pun">(</span><span class="kw">new</span> <span class="fn">HttpClient</span><span class="pun">())],</span>
+  port<span class="pun">:</span> <span class="num">3000</span><span class="pun">,</span>
+  auth<span class="pun">:</span> <span class="pun">{</span> token<span class="pun">:</span> process<span class="pun">.</span>env<span class="pun">.</span><span class="prop">API_TOKEN</span> <span class="pun">},</span>
+<span class="pun">});</span>
+
+<span class="cm">// Clients send:</span>
+<span class="cm">// Authorization: Bearer &lt;token&gt;</span></code>`;
+---
+
+<section id="server">
+  <div class="hline flex flex-wrap items-start justify-between gap-3 px-10 py-8">
+    <div>
+      <div class="mb-1 flex items-center gap-3">
+        <h2 class="text-[28px] font-bold tracking-tight">Skip the API boilerplate.</h2>
+      </div>
+      <p class="text-[14px]" style="color: var(--muted);">
+        anime-sdk ships with a ready-to-run HTTP server. Routes for search, episodes, streams, and
+        track metadata; an optional stream + subtitle proxy; bring-your-own cache with a two-method
+        get/set interface; bearer-token auth. Point any client at it, ship.
+      </p>
+    </div>
+  </div>
+
+  <div class="hline grid grid-cols-1 lg:grid-cols-3">
+    <div class="cell no-bottom show-dots px-8 py-8">
+      <div class="mb-5 flex items-center gap-3">
+        <span class="badge badge-ok">Start it</span>
+        <span class="font-mono text-[11px]" style="color: var(--muted);">server.ts</span>
+      </div>
+      <pre class="font-mono text-[12px] leading-[1.85] text-zinc-300" set:html={serverStartCode} />
+    </div>
+
+    <div class="cell no-bottom show-dots px-8 py-8">
+      <div class="mb-5 flex items-center gap-3">
+        <span class="badge badge-muted">Call it from anywhere</span>
+        <span class="font-mono text-[11px]" style="color: var(--muted);">curl / fetch / axios</span>
+      </div>
+      <pre class="font-mono text-[12px] leading-[1.85] text-zinc-300" set:html={serverCurlCode} />
+      <p class="mt-4 text-[11.5px] leading-relaxed" style="color: var(--muted);">
+        Any client that speaks HTTP: React Native, Swift, Kotlin, Flutter, Python, you name it.
+      </p>
+    </div>
+
+    <div class="cell no-right no-bottom show-dots px-8 py-8">
+      <div class="mb-5 flex items-center gap-3">
+        <span class="badge badge-muted">Lock it down</span>
+        <span class="font-mono text-[11px]" style="color: var(--muted);">optional</span>
+      </div>
+      <pre class="font-mono text-[12px] leading-[1.85] text-zinc-300" set:html={serverAuthCode} />
+      <p class="mt-4 text-[11.5px] leading-relaxed" style="color: var(--muted);">
+        Skip auth entirely if it's local. The SDK works standalone too. No server required.
+      </p>
+    </div>
+  </div>
+</section>

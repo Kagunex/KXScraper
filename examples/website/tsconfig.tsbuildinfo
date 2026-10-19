@@ -1,0 +1,1 @@
+{"root":["./src/App.tsx","./src/api.ts","./src/main.tsx","./src/components/Layout.tsx","./src/pages/Console.tsx","./src/pages/Episodes.tsx","./src/pages/Search.tsx","./src/pages/Stream.tsx","./src/pages/SubtitleTesting.tsx"],"errors":true,"version":"5.9.3"}
